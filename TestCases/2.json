@@ -6,7 +6,7 @@
                     "input": "I want to make payment to my auto policy",
                     "output": [
                         {
-                            "contains": "ok ghj would you like to use your card on file ending in 6582 "
+                            "contains": "ok would you like to use your card on file ending in 6582 "
                         }
                     ]
                 },
@@ -17,10 +17,10 @@
                             "contains": "Ok, Please provide your new credit card details in the form which I will be sending you in a few seconds"
                         },
                         {
-                            "contains": "Please provide your credit card details for the New payment source using a form:"
+                            "contains": "Please fff provide your credit card details for the New payment source using a form:"
                         },
                         {
-                            "contains": "fom"
+                            "contains": "form"
                         }
                     ]
                 }
