@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
+const config = require('./Config')
 
-const apiUrl = 'https://demo-bots.kore.ai:443/chatbot/v2/webhook/st-60787ea9-b329-576d-80e1-0c8b71505ec9/hookInstance/ivrInst-6ad846f2-75b0-55a1-8029-aab86de09817';
-const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6ImNzLTg5ZTNiZGMyLTNiYTgtNWU4Ni1hODZmLTg4ZTZhZmZmNDU3ZCIsInN1YiI6InJlcG9ydGF1dG9tYXRpb24ifQ.QMszvgE-NLEB-HqUN0f1oQxQCFJ9pdv9NZPDf4jepFE';
-const testFile = [1, 2];
+const apiUrl = config.apiUrl;
+const authToken = config.authToken
+const testFile = [1, 2, 3, 4, 5];
 let currentTestIndex = 0;
-var testCases = ' '
+
+
 const axiosInstance = axios.create({
     baseURL: apiUrl,
     headers: {
@@ -22,24 +24,23 @@ function loadTestCase() {
     }
 }
 
-
 // Message comparison function
 function messageCompare(actual, expected) {
     if (actual.type === "text") {
         actual = actual.val.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
         expected = expected.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
-
-        // console.log("Actual:", actual);
-        // console.log("Expected:", expected);
-
+        // console.log("Actual:", actual + '\n');
+        // console.log("Expected:", expected + '\n');
         const expectedWords = expected.split(' ');
         const foundAllWords = expectedWords.every(word => actual.includes(word));
-
         if (foundAllWords) {
             // console.log("-----Pass------" + '\n');
             return true;
         } else {
-            // console.log("-----Fail------" + '\n');
+            console.log('\n' + "-----Fail------")
+            console.log('\n' + "Actual:", actual + '\n');
+            console.log("Expected:", expected + '\n');
+            console.log("---------------" + '\n');
             return false;
         }
     } else if (actual.type === "form") {
@@ -52,7 +53,6 @@ function messageCompare(actual, expected) {
 // Main function to handle responses and messages
 async function handleResponse(response, expectedMessages, counter) {
     const data = response.data.data;
-    
     for (let i = 0; i < data.length; i++) {
         if (i < expectedMessages.length) {
             if (!messageCompare(data[i], expectedMessages[i].contains)) {
@@ -60,17 +60,16 @@ async function handleResponse(response, expectedMessages, counter) {
                 return;
             }
         } else {
-            console.log("Task ended"+ '\n');
+            console.log("Flow Missing" + '\n');
             return;
         }
     }
     if (counter < testCases.testCases[0].messages.length) {
         const message = testCases.testCases[0].messages[counter].input;
         const output = testCases.testCases[0].messages[counter].output;
-        
         await sendMessage(message, output, counter + 1);
     } else {
-        console.log('Test case passed'+ '\n');
+        console.log('Test case passed' + '\n');
     }
 }
 
@@ -87,14 +86,13 @@ async function sendMessage(message, expected, counter) {
         from: {
             id: 'U12345',
             userInfo: {
-                firstName: 'Hari',
-                lastName: 'Guptha',
-                email: 'hariguptha.anbalagan@kore.com'
+                firstName: config.firstName,
+                lastName: config.lastName,
+                email: config.email
             }
         },
         mergeIdentity: true
     };
-
     try {
         const response = await axiosInstance.post('', requestData);
         await handleResponse(response, expected, counter);
@@ -105,22 +103,20 @@ async function sendMessage(message, expected, counter) {
 
 async function runTests() {
     testCases = loadTestCase();
-
     if (testCases) {
         console.log(`Running Test Case ${currentTestIndex + 1}`);
         const message = testCases.testCases[0].messages[0].input;
         output = testCases.testCases[0].messages[0].output;
-
         await sendMessage(message, output, 1);
         currentTestIndex++; // Move to the next test case
         runTests(); // Continue with the next test case
     } else {
-        console.log('All test cases completed.'+ '\n');
+        console.log('All test cases completed.' + '\n');
         process.exit(0); // Exit the script when all tests are done
     }
 }
 
 app.listen(4001, () => {
-    console.log("Script running"+ '\n');
+    console.log("Script running" + '\n');
     runTests();
 });
