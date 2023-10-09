@@ -149,6 +149,10 @@ async function chooseTestCase() {
     }
 }
 
+app.get('/',(req,res)=>{
+    res.send("Report Automation")
+})
+
 
 app.listen(4001, () => {
     console.log("Script running" + '\n');
