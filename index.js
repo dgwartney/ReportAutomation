@@ -1,24 +1,33 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
-const config = require('./Config')
+const { config, Insurance, Bank, Travel, Cmt } = require('./Config')
 
-const apiUrl = config.apiUrl;
-const authToken = config.authToken
-const testFile = [1, 2, 3, 4, 5];
+const Bot = ['Bank']
+const BotConfig = [ Bank]
 let currentTestIndex = 0;
+let currentbot = 0
 
 
-const axiosInstance = axios.create({
-    baseURL: apiUrl,
-    headers: {
-        Authorization: `Bearer ${authToken}`
-    }
-});
+function getbotaxios() {
+    var apiUrl = BotConfig[currentbot].apiUrl;
+    var authToken = BotConfig[currentbot].authToken;
+    // console.log(currentbot)
+    // console.log(authToken)
+    const axiosInstance = axios.create({
+        baseURL: apiUrl,
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    });
+    return axiosInstance
+}
+
 
 function loadTestCase() {
+    var testFile = BotConfig[currentbot].noTestcase
     if (currentTestIndex < testFile.length) {
-        return require(`./TestCases/${testFile[currentTestIndex]}.json`);
+        return require(`./${Bot[currentbot]}-TestCase/${testFile[currentTestIndex]}.json`);
     } else {
         return null;
     }
@@ -26,9 +35,14 @@ function loadTestCase() {
 
 // Message comparison function
 function messageCompare(actual, expected) {
-    if (actual.type === "text") {
-        actual = actual.val.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
-        expected = expected.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
+    if (actual.type === "text" || actual.type === "template" ) {
+        if (actual.type === "template") {
+            actual = actual.val.text.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
+            expected = expected.toLowerCase().replace(/[^a-z0-9]+/g, ' '); 
+        } else {
+            actual = actual.val.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
+            expected = expected.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
+        }
         // console.log("Actual:", actual + '\n');
         // console.log("Expected:", expected + '\n');
         const expectedWords = expected.split(' ');
@@ -53,6 +67,7 @@ function messageCompare(actual, expected) {
 // Main function to handle responses and messages
 async function handleResponse(response, expectedMessages, counter) {
     const data = response.data.data;
+    // console.log(data)
     for (let i = 0; i < data.length; i++) {
         if (i < expectedMessages.length) {
             if (!messageCompare(data[i], expectedMessages[i].contains)) {
@@ -75,6 +90,7 @@ async function handleResponse(response, expectedMessages, counter) {
 
 // Function to send a message
 async function sendMessage(message, expected, counter) {
+    // console.log(message + '\n')
     const requestData = {
         session: {
             new: counter === 1
@@ -94,7 +110,8 @@ async function sendMessage(message, expected, counter) {
         mergeIdentity: true
     };
     try {
-        const response = await axiosInstance.post('', requestData);
+        var botaxios = getbotaxios()
+        const response = await botaxios.post('', requestData);
         await handleResponse(response, expected, counter);
     } catch (error) {
         console.error('Error:', error);
@@ -102,6 +119,7 @@ async function sendMessage(message, expected, counter) {
 }
 
 async function runTests() {
+
     testCases = loadTestCase();
     if (testCases) {
         console.log(`Running Test Case ${currentTestIndex + 1}`);
@@ -112,11 +130,25 @@ async function runTests() {
         runTests(); // Continue with the next test case
     } else {
         console.log('All test cases completed.' + '\n');
-        process.exit(0); // Exit the script when all tests are done
+        chooseTestCase()
     }
 }
 
+async function chooseTestCase() {
+    if (currentbot < Bot.length - 1) {
+        currentbot = currentbot + 1
+        currentTestIndex = 0
+        console.log('----------' + Bot[currentbot] + '-----------');
+        runTests()
+    } else {
+        console.log("All the bot test cases have been completed.")
+        process.exit(0);
+    }
+}
+
+
 app.listen(4001, () => {
     console.log("Script running" + '\n');
-    runTests();
-});
+    console.log('----------' + Bot[currentbot] + '-----------');
+    runTests()
+})

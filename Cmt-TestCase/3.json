@@ -1,0 +1,32 @@
+{
+    "testCases": [
+        {
+            "messages": [
+                {
+                    "input": "I want to add an additional phone line service.",
+                    "output": [
+                        {
+                            "contains": "Select an option.\na) Add Phone\nb) Add Service\n"
+                        }
+                    ]
+                },
+                {
+                    "input": "Add Phone",
+                    "output": [
+                        {
+                            "contains": "Ok let’s get you set up with phone service. You can add a home phone line to your account for $10 more per month. Should I add phone service to your plan?"
+                        }
+                    ]
+                },
+                {
+                    "input": "yes",
+                    "output": [
+                        {
+                            "contains": "Thank you! we are adding a home phone line to your account for $10 per month in addition to your services"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

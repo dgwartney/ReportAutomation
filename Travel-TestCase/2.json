@@ -1,0 +1,155 @@
+{
+    "testCases": [
+        {
+            "messages": [
+                {
+                    "input": "I want to book a flight",
+                    "output": [
+                        {
+                            "contains": "okay so tell me from where will you travel "
+                        }
+                    ]
+                },
+                {
+                    "input": "Boston",
+                    "output": [
+                        {
+                            "contains": "Also which city would you like to visit ?"
+                        }
+                    ]
+                }
+                ,{
+                    "input": "Miami",
+                    "output": [
+                        {
+                            "contains": "Cool, when are you planning to travel?"
+                        }
+                    ]
+                },{
+                    "input": "Next Sunday",
+                    "output": [
+                        {
+                            "contains": "please confirm that you want to travel on 2023 10 22"
+                        }
+                    ]
+                },{
+                    "input": "yes",
+                    "output": [
+                        {
+                            "contains": "is your return flight also something you need to be arranged"
+                        }
+                    ]
+                },{
+                    "input": "Yes, please",
+                    "output": [
+                        {
+                            "contains": "cool may i know which date do you wish to return"
+                        }
+                    ]
+                },{
+                    "input": "two days after departure",
+                    "output": [
+                        {
+                            "contains": "below listed flights are available on 2023 10 22"
+                        },{
+                            "contains":"flight details a look again b nk2042 c ua2120 d aa2249 e jt2140"
+                        }
+                    ]
+                },{
+                    "input": "UA2120",
+                    "output": [
+                        {
+                            "contains": "below listed flights are available for return on 2023 10 24"
+                        },{
+                            "contains" : "{&quot;type&quot;:&quot;template&quot;,&quot;title&quot;:&quot;&quot;,&quot;payload&quot;:{&quot;template_type&quot;:&quot;carousel&quot;,&quot;elements&quot;:[{&quot;title&quot;:&quot;*Flight Number: *UA2120*\\nFare: *$290*\\nFlightType : *Non-Stop&quot;,&quot;image_url&quot;:&quot;https://demo.kore.ai/barefoot/sites/default/files/demo_uploads/unitedairlines.jpg&quot;,&quot;subtitle&quot;:&quot;Departure Time: *07:13PM*\\nDeparture Time: *08:56PM*&quot;,&quot;buttons&quot;:[{&quot;type&quot;:&quot;postback&quot;,&quot;title&quot;:&quot;United Airlines&quot;,&quot;payload&quot;:&quot;UA2120&quot;}]},{&quot;title&quot;:&quot;*Flight Number: *NK2042*\\nFare: *$151*\\nFlightType : *One-Stop&quot;,&quot;image_url&quot;:&quot;https://demo.kore.ai/barefoot/sites/default/files/demo_uploads/spirit.jpg&quot;,&quot;subtitle&quot;:&quot;Departure Time: *01:13PM*\\nDeparture Time: *04:56PM*&quot;,&quot;buttons&quot;:[{&quot;type&quot;:&quot;postback&quot;,&quot;title&quot;:&quot;Spirit Airlines&quot;,&quot;payload&quot;:&quot;NK2042&quot;}]},{&quot;title&quot;:&quot;*Flight Number: *AA2249*\\nFare: *$182*\\nFlightType : *One-Stop&quot;,&quot;image_url&quot;:&quot;https://demo.kore.ai/barefoot/sites/default/files/demo_uploads/americanairlines.jpg&quot;,&quot;subtitle&quot;:&quot;Departure Time: *06:30AM*\\nDeparture Time: *10:56AM*&quot;,&quot;buttons&quot;:[{&quot;type&quot;:&quot;postback&quot;,&quot;title&quot;:&quot;American Airlines&quot;,&quot;payload&quot;:&quot;AA2249&quot;}]},{&quot;title&quot;:&quot;*Flight Number: *JT2140*\\nFare: *$250*\\nFlightType : *One-Stop&quot;,&quot;image_url&quot;:&quot;https://demo.kore.ai/barefoot/sites/default/files/demo_uploads/jetblue.jpg&quot;,&quot;subtitle&quot;:&quot;Departure Time: *11:30PM*\\nDeparture Time: *05:12AM*&quot;,&quot;buttons&quot;:[{&quot;type&quot;:&quot;postback&quot;,&quot;title&quot;:&quot;Jetblue Airlines&quot;,&quot;payload&quot;:&quot;JT2140&quot;}]}]}}"
+                        }
+                    ]
+                },{
+                    "input": "nk2042",
+                    "output": [
+                        {
+                            "contains": "can we proceed"
+                        }
+                    ]
+                },{
+                    "input": "yes",
+                    "output": [
+                        {
+                            "contains": "How many passenger will be traveling with you?"
+                        }
+                    ]
+                },{
+                    "input": "1",
+                    "output": [
+                        {
+                            "contains": "Please provide complete name of passenger 1"
+                        }
+                    ]
+                },{
+                    "input": "John Smith",
+                    "output": [
+                        {
+                            "contains": "Can you also provide your mobile number"
+                        }
+                    ]
+                },{
+                    "input": "99999339278",
+                    "output": [
+                        {
+                            "contains": "Great, please let me know If there any infants traveling with you?"
+                        }
+                    ]
+                },{
+                    "input": "no",
+                    "output": [
+                        {
+                            "contains": "How would you like to pay?"
+                        }
+                    ]
+                },{
+                    "input": "Credit Card",
+                    "output": [
+                        {
+                            "contains": "Please provide your credit card number?"
+                        }
+                    ]
+                },{
+                    "input": "1234567891234567",
+                    "output": [
+                        {
+                            "contains": "Enter the name on the card"
+                        }
+                    ]
+                },{
+                    "input": "John Smith",
+                    "output": [
+                        {
+                            "contains": "Could you please provide your CVV"
+                        }
+                    ]
+                },{
+                    "input": "102",
+                    "output": [
+                        {
+                            "contains": "okay here s the summary flight details travel date 2023 10 22 flying from boston flying to miami passenger 1 return flight details return date 2023 10 24 flying from miami flying to boston payment details amount 290 payment type credit card card number 1234567891234567 name on card john smith cvv 102 shall i confirm the details"
+                        }
+                    ]
+                },{
+                    "input": "yes",
+                    "output": [
+                        {
+                            "contains": "Great! Your UA2120 flight from New York to London on 2023-01-24 with PNR FO1180 is confirmed. You will receive the flight details through text message in few minutes from now would you like to book an airport pick up and drop?"
+                        }
+                    ]
+                },{
+                    "input": "no",
+                    "output": [
+                        {
+                            "contains": "Is there anything else I can help you with today?"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

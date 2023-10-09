@@ -1,0 +1,26 @@
+{
+    "testCases": [
+        {
+            "messages": [
+                {
+                    "input": "I lost my credit card",
+                    "output": [
+                        {
+                            "contains": "select an option a card lost b replace card"
+                        }
+                    ]
+                },
+                {
+                    "input": "card lost",
+                    "output": [
+                        {
+                            "contains": "we are sorry to hear that you have lost your card can you please provide the details of your card"
+                        },{
+                            "contains":"please provide the details of your card"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

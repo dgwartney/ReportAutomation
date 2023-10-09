@@ -1,0 +1,19 @@
+{
+    "testCases": [
+        {
+            "messages": [
+                {
+                    "input": "How will I know when my promotional rate ends?",
+                    "output": [
+                        {
+                            "contains": "in the month prior to your promotional rate ending we ll include a reminder in the spectrum news section of your bill"
+                        },
+                        {
+                            "contains": "help you with?"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}  

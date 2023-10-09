@@ -1,0 +1,3 @@
+const testFile = [1, 2, 3, 4, 5];
+const Bot = ['Insurance', 'Bank', 'Travel', 'Cmt']
+const BotConfig = [Insurance, Bank, Travel, Cmt]

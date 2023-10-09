@@ -1,0 +1,18 @@
+{
+    "testCases": [
+        {
+            "messages": [
+                {
+                    "input": " Can I make an online payment the same day I enroll?",
+                    "output": [
+                        {
+                            "contains": "yes you can make online payments the same day that you enroll would you like to make a payment"
+                        },{
+                            "contains" :"I can help you with"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

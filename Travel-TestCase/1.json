@@ -1,0 +1,19 @@
+{
+    "testCases": [
+        {
+            "messages": [
+                {
+                    "input": "What is the baggage limit for an economy passenger?",
+                    "output": [
+                        {
+                            "contains": "for economy passengers with two pieces of luggage the total combined dimensions length breadth height of both pieces should not exceed 273cm 107 inches also the linear dimension of each piece should not exceed 62 inches the weight of each bag must not exceed 23 kgs or 50 pounds the first checked bag costs 35 and the second checked bag costs 65"
+                        },
+                        {
+                            "contains": "help you with?"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}  

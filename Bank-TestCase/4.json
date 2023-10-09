@@ -1,0 +1,43 @@
+{
+    "testCases": [
+        {
+            "messages": [
+                {
+                    "input": " want to transfer funds from my checking account",
+                    "output": [
+                        {
+                            "contains": "what amount would you like to transfer"
+                        }
+                    ]
+                },
+                {
+                    "input": "200",
+                    "output": [
+                        {
+                            "contains": "i can transfer 200 from your checking account can you confirm the account which you would like to transfer these funds to"
+                        }
+                    ]
+                },
+                {
+                    "input": "Savings",
+                    "output": [
+                        {
+                            "contains": "i am ready to transfer 200 from checking account to savings account shall i proceed "
+                        }
+                    ]
+                },
+                {
+                    "input": "yes",
+                    "output": [
+                        {
+                            "contains": "your fund transfer is successful the balance of your checking account is 7 296 13"
+                        },
+                        {
+                            "contains":"I help you with?"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
