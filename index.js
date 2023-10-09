@@ -35,10 +35,10 @@ function loadTestCase() {
 
 // Message comparison function
 function messageCompare(actual, expected) {
-    if (actual.type === "text" || actual.type === "template" ) {
+    if (actual.type === "text" || actual.type === "template") {
         if (actual.type === "template") {
             actual = actual.val.text.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
-            expected = expected.toLowerCase().replace(/[^a-z0-9]+/g, ' '); 
+            expected = expected.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
         } else {
             actual = actual.val.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
             expected = expected.toLowerCase().replace(/[^a-z0-9]+/g, ' ');
@@ -141,8 +141,11 @@ async function chooseTestCase() {
         console.log('----------' + Bot[currentbot] + '-----------');
         runTests()
     } else {
-        console.log("All the bot test cases have been completed.")
-        process.exit(0);
+        console.log("All the bot test cases have been completed." + '\n')
+        currentTestIndex = 0;
+        currentbot = 0
+        console.log('----------' + Bot[currentbot] + '-----------');
+        runTests()
     }
 }
 
