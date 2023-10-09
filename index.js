@@ -3,8 +3,8 @@ const app = express();
 const axios = require('axios');
 const { config, Insurance, Bank, Travel, Cmt } = require('./Config')
 
-const Bot = ['Bank']
-const BotConfig = [ Bank]
+const Bot = ['Insurance', 'Bank', 'Travel', 'Cmt']
+const BotConfig = [Insurance, Bank, Travel, Cmt]
 let currentTestIndex = 0;
 let currentbot = 0
 
