@@ -12,7 +12,7 @@ const Insurance = {
 const Bank = {
     apiUrl: "https://demo-bots.kore.ai:443/chatbot/v2/webhook/st-d009c4f5-180a-5925-98cb-da4b1303cf6b/hookInstance/ivrInst-eb4b9140-84c0-5a7b-aac2-31dc1e0ef8de",
     authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6ImNzLTUzZmIzMGE4LWMxMDItNWZhYi1hYTA0LTI2ZmIzZWNjMWFkNSIsInN1YiI6InJlcG9ydC1hdXRvbWF0aW9uIn0.R2PBKxYDk_5fWKVli0pt1D80xx5HCkHqC8ZJn0AO9Kg",
-    noTestcase: [3]
+    noTestcase: [1,2,3,4,5]
 }
 
 const Travel = {
