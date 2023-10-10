@@ -8,6 +8,7 @@ const BotConfig = [Insurance, Bank, Travel, Cmt]
 let currentTestIndex = 0;
 let currentbot = 0
 
+var totalexecutioncount = 0
 
 function getbotaxios() {
     var apiUrl = BotConfig[currentbot].apiUrl;
@@ -142,6 +143,7 @@ async function chooseTestCase() {
         runTests()
     } else {
         console.log("All the bot test cases have been completed." + '\n')
+        totalexecutioncount++
         currentTestIndex = 0;
         currentbot = 0
         console.log('----------' + Bot[currentbot] + '-----------');
@@ -149,9 +151,13 @@ async function chooseTestCase() {
     }
 }
 
-app.get('/',(req,res)=>{
-    res.send("Report Automation")
-})
+app.get('/execution-count', (req, res) => {
+    res.json({ totalexecutioncount });
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
 
 
 app.listen(4001, () => {
