@@ -146,8 +146,11 @@ async function chooseTestCase() {
         totalexecutioncount++
         currentTestIndex = 0;
         currentbot = 0
-        console.log('----------' + Bot[currentbot] + '-----------');
-        runTests()
+        // Add a delay of 2 minutes
+        setTimeout(() => {
+            console.log('----------' + Bot[currentbot] + '-----------');
+            runTests();
+        }, 120000);
     }
 }
 
